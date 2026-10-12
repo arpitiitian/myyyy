@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Papa | Royal Rajasthani Celebration</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts: Rozha One for Hindi Shayari, Cinzel Decorative & Poppins for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rozha+One&family=Yatra+One&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: {
+              black: '#0A0605',
+              darkRed: '#32060C',
+              maroon: '#5A0F1A',
+              crimson: '#8C1D2A',
+              gold: '#E5A93B',
+              brightGold: '#FFD700',
+              sand: '#DF9B52',
+              emerald: '#0E4438',
+              cream: '#FFF8E7'
+            }
+          },
+          fontFamily: {
+            hindi: ['"Rozha One"', '"Yatra One"', 'serif'],
+            royal: ['"Cinzel Decorative"', 'serif'],
+            sans: ['Poppins', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Traditional Rajasthani Bandhani and Jaali background */
+    .rajasthani-bg {
+      background-color: #0A0605;
+      background-image:
+        radial-gradient(#E5A93B22 1.2px, transparent 1.2px),
+        radial-gradient(#8C1D2A30 1.8px, #0A0605 1.8px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    /* Royal Jharokha Arch styling */
+    .jharokha-arch {
+      border: 3px solid #E5A93B;
+      box-shadow: 0 0 25px rgba(229, 169, 59, 0.45), inset 0 0 20px rgba(90, 15, 26, 0.8);
+      border-radius: 999px 999px 24px 24px;
+    }
+
+    .ethnic-gold-border {
+      border: 2px solid #E5A93B;
+      background: linear-gradient(145deg, #1A080C 0%, #2A0E15 60%, #150609 100%);
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(229, 169, 59, 0.2);
+    }
+
+    /* Shimmer Gold Text */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF6BD 0%, #FFD700 35%, #DDA032 70%, #FFF8CF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Diya flame animation */
+    @keyframes diyaFlicker {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(-1deg);
+        opacity: 0.95;
+      }
+
+      25% {
+        transform: scale(1.08, 0.96) rotate(2deg);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(0.96, 1.06) rotate(-2deg);
+        opacity: 0.88;
+      }
+
+      75% {
+        transform: scale(1.04, 1.01) rotate(1deg);
+        opacity: 0.94;
+      }
+    }
+
+    .diya-flame {
+      animation: diyaFlicker 1.6s infinite ease-in-out;
+      transform-origin: bottom center;
+    }
+
+    /* Floating rose petals */
+    @keyframes floatPetal {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 0.95;
+      }
+
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .petal-falling {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      animation: floatPetal linear infinite;
+    }
+
+    /* Marigold Toran garland strip */
+    .toran-garland {
+      background-image: repeating-linear-gradient(45deg, #FF9933 0px, #FF9933 16px, #0E4438 16px, #0E4438 32px, #E5A93B 32px, #E5A93B 48px);
+    }
+
+    /* Camel Caravan Desert Silhouette Track */
+    .desert-glow {
+      background: radial-gradient(circle at 50% 100%, rgba(223, 155, 82, 0.15), transparent 70%);
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0A0605;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #5A0F1A;
+      border: 2px solid #E5A93B;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body
+  class="rajasthani-bg text-royal-cream font-sans selection:bg-royal-gold selection:text-royal-black min-h-screen relative overflow-x-hidden">
+
+  <div id="petals-container" class="fixed inset-0 pointer-events-none z-30 overflow-hidden"></div>
+
+  <!-- Audio and Rose Shower Interactive Floating Controls -->
+  <div
+    class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-royal-darkRed/95 backdrop-blur-md border border-royal-gold p-2.5 rounded-full shadow-2xl">
+   
+    <button onclick="triggerRoseShower()" title="Shower Rose Petals"
+      class="w-10 h-10 rounded-full bg-gradient-to-r from-pink-600 to-rose-700 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-md">
+      🌸
+    </button>
+  </div>
+
+  <!-- Festive Toran & Top Header Bar -->
+  <header class="relative w-full z-20">
+    <div class="w-full h-3.5 toran-garland shadow-md"></div>
+    <div
+      class="flex justify-between items-center px-4 md:px-12 py-3 bg-gradient-to-b from-royal-darkRed via-royal-darkRed/95 to-transparent">
+
+      <!-- Rajasthani Peacock & Mangal Inscription -->
+      <div class="flex items-center gap-3">
+        <span class="text-2xl drop-shadow">🦚</span>
+        <div>
+          <span class="text-xs uppercase tracking-widest text-amber-300 font-semibold block">Royal Rajasthani
+            Heritage</span>
+          <span class="font-hindi text-base md:text-xl text-royal-brightGold font-bold">॥ ॐ श्री गणेशाय नमः ॥</span>
+        </div>
+      </div>
+
+      <!-- Center Cultural Welcome "Padharo Sa" -->
+      <div
+        class="hidden sm:inline-flex items-center gap-3 px-6 py-1.5 rounded-full border-2 border-royal-gold bg-black/75 shadow-lg">
+        <span class="text-base">🐪</span>
+        <span class="font-hindi text-xl text-royal-brightGold tracking-wider font-bold">पधारो सा!</span>
+        <span class="text-base">🐘</span>
+      </div>
+
+      <!-- Quick Navigation Button -->
+      <div class="flex items-center gap-3">
+        <a href="#safarnama"
+          class="text-xs md:text-sm px-4 py-1.5 rounded-full border border-royal-gold/70 text-royal-gold hover:bg-royal-gold hover:text-royal-black font-semibold transition-all">
+          Safarnama (1974 - Today) ➔
+        </a>
+      </div>
+    </div>
+
+    <!-- Festive Marigold Garland Strip -->
+    <div class="w-full flex justify-around overflow-hidden py-1 opacity-90 select-none">
+      <div class="flex gap-4 md:gap-8 items-center text-turmeric text-base md:text-lg animate-pulse">
+        <span>🌼</span><span>🏵️</span><span>🌸</span><span>🏵️</span><span>🌼</span><span>🏵️</span><span>🌸</span><span>🏵️</span>
+        <span>🌼</span><span>🏵️</span><span>🌸</span><span>🏵️</span><span>🌼</span><span>🏵️</span><span>🌸</span><span>🏵️</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Rajasthani Desert Royal Caravan (Camels & Elephants Parade) -->
+  <section class="max-w-6xl mx-auto px-4 pt-3 pb-1 desert-glow">
+    <div class="flex justify-between items-center opacity-90 overflow-x-auto py-2 gap-4">
+
+      <!-- Decorated Royal Camel 1 -->
+      <div class="w-24 md:w-36 shrink-0 transition-transform hover:scale-105 duration-300">
+        <svg viewBox="0 0 220 180" class="w-full h-auto drop-shadow-md">
+          <path
+            d="M40,140 L50,85 C55,80 65,78 75,80 C80,70 95,65 110,68 C115,55 130,50 145,55 C160,60 170,80 165,95 C175,90 190,95 195,110 L195,140 L180,140 L180,105 L165,105 L160,140 L145,140 L148,110 L115,110 L110,140 L95,140 L100,105 L80,105 L75,140 Z"
+            fill="#D29955" stroke="#8C531B" stroke-width="2.5" />
+          <path d="M165,90 C175,70 185,50 180,30 C180,25 190,22 196,25 C200,28 202,35 198,40 C192,55 185,75 178,95 Z"
+            fill="#D29955" stroke="#8C531B" stroke-width="2" />
+          <circle cx="193" cy="27" r="2.5" fill="#1A080C" />
+          <path d="M196,28 L188,38 L175,55" stroke="#FFD700" stroke-width="1.8" fill="none" />
+          <path d="M182,42 Q188,48 185,55 Q180,62 176,68" stroke="#8C1D2A" stroke-width="3" fill="none" />
+          <circle cx="184" cy="48" r="3" fill="#FFD700" />
+          <circle cx="180" cy="60" r="3" fill="#0E4438" />
+          <path d="M95,68 Q130,62 155,70 L150,96 Q125,102 98,95 Z" fill="#8C1D2A" stroke="#FFD700" stroke-width="2.5" />
+          <path d="M105,75 Q128,70 145,76 L142,90 Q125,94 108,89 Z" fill="#0E4438" stroke="#FFD700"
+            stroke-width="1.5" />
+          <circle cx="125" cy="82" r="5" fill="#FFD700" />
+          <circle cx="125" cy="82" r="2" fill="#8C1D2A" />
+          <rect x="40" y="132" width="12" height="4" fill="#FFD700" rx="1" />
+          <rect x="95" y="132" width="12" height="4" fill="#FFD700" rx="1" />
+          <rect x="145" y="132" width="12" height="4" fill="#FFD700" rx="1" />
+          <rect x="180" y="132" width="12" height="4" fill="#FFD700" rx="1" />
+        </svg>
+      </div>
+
+      <!-- Decorated Royal Elephant (Left) -->
+      <div class="w-24 md:w-36 shrink-0 transition-transform hover:scale-105 duration-300">
+        <svg viewBox="0 0 200 160" class="w-full h-auto drop-shadow-md">
+          <path
+            d="M160,110 C160,135 150,150 140,150 L125,150 L125,115 L105,115 L105,150 L85,150 C80,125 75,110 60,110 C45,110 40,125 35,150 L20,150 L25,95 C25,55 55,30 100,30 C140,30 165,55 170,85 C175,100 190,105 195,95 C198,90 190,80 185,80 C180,80 178,88 172,88"
+            fill="#F4D06F" stroke="#B8860B" stroke-width="2.5" />
+          <path d="M70,55 Q100,45 130,55 L135,100 Q100,110 65,100 Z" fill="#8B0000" stroke="#FFD700" stroke-width="3" />
+          <path d="M80,65 Q100,58 120,65 L122,90 Q100,98 78,90 Z" fill="#114B3E" stroke="#FFD700" stroke-width="2" />
+          <circle cx="100" cy="78" r="8" fill="#FFD700" />
+          <circle cx="100" cy="78" r="4" fill="#8B0000" />
+          <circle cx="150" cy="55" r="4" fill="#000" />
+          <circle cx="152" cy="54" r="1.5" fill="#FFF" />
+        </svg>
+      </div>
+
+      <!-- Sacred Royal Diya Lamp (Center) -->
+      <div class="flex flex-col items-center shrink-0">
+        <div class="relative w-12 h-14 flex flex-col items-center">
+          <div
+            class="diya-flame w-5 h-8 bg-gradient-to-t from-orange-500 via-amber-300 to-yellow-100 rounded-full shadow-[0_0_20px_#FFA500]">
+          </div>
+          <div
+            class="w-12 h-5 bg-gradient-to-r from-amber-800 via-yellow-600 to-amber-800 rounded-b-full border-t border-amber-300 shadow-md">
+          </div>
+        </div>
+        <span class="font-hindi text-sm text-royal-brightGold mt-1 font-bold">॥ शतायु भव: ॥</span>
+      </div>
+
+      <!-- Decorated Royal Elephant (Mirrored) -->
+      <div class="w-24 md:w-36 shrink-0 transform -scale-x-100 transition-transform hover:scale-105 duration-300">
+        <svg viewBox="0 0 200 160" class="w-full h-auto drop-shadow-md">
+          <path
+            d="M160,110 C160,135 150,150 140,150 L125,150 L125,115 L105,115 L105,150 L85,150 C80,125 75,110 60,110 C45,110 40,125 35,150 L20,150 L25,95 C25,55 55,30 100,30 C140,30 165,55 170,85 C175,100 190,105 195,95 C198,90 190,80 185,80 C180,80 178,88 172,88"
+            fill="#F4D06F" stroke="#B8860B" stroke-width="2.5" />
+          <path d="M70,55 Q100,45 130,55 L135,100 Q100,110 65,100 Z" fill="#8B0000" stroke="#FFD700" stroke-width="3" />
+          <circle cx="100" cy="78" r="8" fill="#FFD700" />
+          <circle cx="150" cy="55" r="4" fill="#000" />
+        </svg>
+      </div>
+
+      <!-- Decorated Royal Camel 2 (Mirrored) -->
+      <div class="w-24 md:w-36 shrink-0 transform -scale-x-100 transition-transform hover:scale-105 duration-300">
+        <svg viewBox="0 0 220 180" class="w-full h-auto drop-shadow-md">
+          <path
+            d="M40,140 L50,85 C55,80 65,78 75,80 C80,70 95,65 110,68 C115,55 130,50 145,55 C160,60 170,80 165,95 C175,90 190,95 195,110 L195,140 L180,140 L180,105 L165,105 L160,140 L145,140 L148,110 L115,110 L110,140 L95,140 L100,105 L80,105 L75,140 Z"
+            fill="#D29955" stroke="#8C531B" stroke-width="2.5" />
+          <path d="M165,90 C175,70 185,50 180,30 C180,25 190,22 196,25 C200,28 202,35 198,40 C192,55 185,75 178,95 Z"
+            fill="#D29955" stroke="#8C531B" stroke-width="2" />
+          <circle cx="193" cy="27" r="2.5" fill="#1A080C" />
+          <path d="M95,68 Q130,62 155,70 L150,96 Q125,102 98,95 Z" fill="#8C1D2A" stroke="#FFD700" stroke-width="2.5" />
+          <circle cx="125" cy="82" r="5" fill="#FFD700" />
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <main class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-2 pb-20">
+
+    <!-- Hero Showcase Card -->
+    <section
+      class="relative my-4 p-6 md:p-12 rounded-3xl border-2 border-royal-gold/60 bg-gradient-to-b from-[#22070D] via-[#160509] to-[#0A0406] shadow-2xl overflow-hidden text-center">
+
+      <!-- Regal Corner Motifs -->
+      <div class="absolute top-3 left-3 text-royal-gold text-2xl select-none">⚜️</div>
+      <div class="absolute top-3 right-3 text-royal-gold text-2xl select-none">⚜️</div>
+      <div class="absolute bottom-3 left-3 text-royal-gold text-2xl select-none">⚜️</div>
+      <div class="absolute bottom-3 right-3 text-royal-gold text-2xl select-none">⚜️</div>
+
+      <!-- Main Heading in English with Royal Golden Shimmer -->
+      <div class="mb-4">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-royal-gold/50 bg-black/60 text-xs tracking-widest text-amber-300 font-semibold uppercase mb-3">
+          <span>👑</span>
+          <span>Honoring Our True King & Mentor</span>
+          <span>👑</span>
+        </div>
+        <h1
+          class="font-royal text-4xl sm:text-6xl md:text-7xl font-bold gold-gradient-text drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] leading-tight">
+          Happy Birthday, Papa!
+        </h1>
+
+        <!-- Hindi Thought / Quote -->
+        <div class="mt-4 max-w-2xl mx-auto p-3.5 rounded-2xl bg-black/50 border border-royal-gold/40">
+          <p class="font-hindi text-xl sm:text-2xl text-amber-200 font-normal leading-relaxed">
+            "पिता वह मजबूत वटवृक्ष हैं, जो खुद धूप सहकर पूरे परिवार को शीतल छांव और सुरक्षा देते हैं।"
+          </p>
+        </div>
+      </div>
+
+      <!-- Royal Jharokha Arch Frame for Papa's Photo -->
+      <div class="relative my-7 inline-block group">
+        <div
+          class="absolute -inset-4 bg-gradient-to-r from-royal-gold via-amber-400 to-rose-600 rounded-full blur-xl opacity-35 group-hover:opacity-75 transition duration-700">
+        </div>
+
+        <div
+          class="relative w-64 h-80 sm:w-72 sm:h-96 mx-auto jharokha-arch p-3 bg-gradient-to-b from-[#380913] to-[#120408] flex flex-col items-center justify-between shadow-2xl">
+
+          <!-- Crown Arch Ornament -->
+          <div class="w-full flex justify-center -mt-2">
+            <svg class="w-16 h-8 text-royal-gold" viewBox="0 0 100 50" fill="currentColor">
+              <path d="M0,50 Q50,0 100,50 Z" />
+              <circle cx="50" cy="18" r="6" fill="#FF4444" />
+            </svg>
+          </div>
+
+          <!-- Hero Image Container (Reads from images/papa.jpg) -->
+          <div
+            class="relative w-full h-[88%] rounded-t-full rounded-b-xl overflow-hidden border-2 border-royal-gold/70 bg-black/50">
+            <img id="heroPapaImg" src="imagess1.jpeg" alt="Beloved Papa"
+              class="w-full h-full object-cover object-top transition duration-500 hover:scale-105"
+              onerror="this.src='https://placehold.co/400x500/380913/FFD700?text=Papa+Ji'">
+            <div
+              class="absolute inset-0 border-4 border-dashed border-amber-400/30 pointer-events-none rounded-t-full rounded-b-xl">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons in English -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-1">
+        <button onclick="triggerGrandCelebration()"
+          class="px-8 py-3.5 rounded-full font-bold text-royal-black bg-gradient-to-r from-amber-400 via-royal-brightGold to-yellow-500 hover:brightness-110 active:scale-95 transition-all shadow-[0_0_25px_rgba(255,215,0,0.6)] flex items-center gap-2 text-base md:text-lg">
+          <span>🎉</span>
+          <span>Celebrate Now!</span>
+          <span>✨</span>
+        </button>
+
+        <a href="#safarnama"
+          class="px-6 py-3.5 rounded-full font-semibold border-2 border-royal-gold text-royal-brightGold hover:bg-royal-gold/20 transition-all flex items-center gap-2">
+          <span>📜</span>
+          <span>Explore Safarnama</span>
+        </a>
+
+        <button onclick="triggerRoseShower()"
+          class="px-6 py-3.5 rounded-full font-semibold bg-rose-900/60 border border-rose-500/80 text-rose-200 hover:bg-rose-800 transition-all flex items-center gap-2">
+          <span>🌹</span>
+          <span>Shower Petals</span>
+        </button>
+      </div>
+
+      <!-- Hindi Dedicated Emotional Shayari Card -->
+      <div
+        class="mt-8 max-w-3xl mx-auto p-6 rounded-2xl bg-royal-maroon/40 border border-royal-gold/40 text-amber-100 text-sm md:text-base leading-relaxed relative">
+        <div class="font-hindi text-xl md:text-2xl text-royal-brightGold mb-2 font-bold">
+          "उंगली पकड़ कर चलना सिखाया, हर मुश्किल में हौसला बढ़ाया..."
+        </div>
+        <p class="font-hindi text-base md:text-lg font-light text-amber-200/90 leading-relaxed">
+          पापा, आपकी सीख और आपके संस्कार हमारी सबसे बड़ी विरासत हैं। आप वो ढाल हैं जो हर आंधी में परिवार के आगे
+          मुस्कराते हुए खड़े रहते हैं। ईश्वर से प्रार्थना है कि आपका जीवन सदैव उत्तम स्वास्थ्य, खुशियों और दीर्घायु से
+          परिपूर्ण रहे। सादर चरण स्पर्श! 🙏✨
+        </p>
+      </div>
+
+    </section>
+
+    <!-- Pillars of Strength Section -->
+    <section class="my-16">
+      <div class="text-center mb-10">
+        <div class="flex items-center justify-center gap-3">
+          <span class="h-0.5 w-12 bg-royal-gold/70"></span>
+          <span class="text-royal-gold text-xs uppercase tracking-widest font-semibold">Royalty & Virtues</span>
+          <span class="h-0.5 w-12 bg-royal-gold/70"></span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-bold text-royal-brightGold mt-2">Pillars of Strength</h2>
+        <p class="text-amber-100/70 text-sm md:text-base mt-1">The values and sacrifices that built our family kingdom
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Pillar 1 -->
+        <div
+          class="ethnic-gold-border p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-all duration-300">
+          <div
+            class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-500/20 border-2 border-royal-gold flex items-center justify-center text-3xl shadow-inner">
+            🛡️
+          </div>
+          <h3 class="text-lg font-bold text-royal-brightGold mb-1">Protective Fortress</h3>
+          <p class="font-hindi text-xs text-amber-300 mb-2">"हर मुसीबत में आगे खड़े रहने वाले"</p>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Quietly taking on every obstacle so our lives could flourish with security and boundless peace.
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div
+          class="ethnic-gold-border p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-all duration-300">
+          <div
+            class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-3xl shadow-inner">
+            🌾
+          </div>
+          <h3 class="text-lg font-bold text-royal-brightGold mb-1">Selfless Dedication</h3>
+          <p class="font-hindi text-xs text-amber-300 mb-2">"निस्वार्थ त्याग और अथक परिश्रम"</p>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Putting your own dreams aside so that our dreams could fly without boundaries.
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div
+          class="ethnic-gold-border p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-all duration-300">
+          <div
+            class="w-16 h-16 mx-auto mb-4 rounded-full bg-rose-500/20 border-2 border-rose-400 flex items-center justify-center text-3xl shadow-inner">
+            🧭
+          </div>
+          <h3 class="text-lg font-bold text-royal-brightGold mb-1">Guiding Compass</h3>
+          <p class="font-hindi text-xs text-amber-300 mb-2">"सच्चा मार्गदर्शन और ज्ञान"</p>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            Whenever life was uncertain, your calm wisdom lit up the straight path with courage and dignity.
+          </p>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div
+          class="ethnic-gold-border p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-all duration-300">
+          <div
+            class="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-500/20 border-2 border-yellow-300 flex items-center justify-center text-3xl shadow-inner">
+            👑
+          </div>
+          <h3 class="text-lg font-bold text-royal-brightGold mb-1">Our Forever Hero</h3>
+          <p class="font-hindi text-xs text-amber-300 mb-2">"परिवार का गौरव और ताज"</p>
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            The proud king who leads not with commands, but with unconditional love and respect.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Life Journey / Safarnama Interactive Timeline -->
+    <section id="safarnama" class="my-20 relative">
+
+      <div class="text-center mb-14">
+        <div
+          class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-royal-maroon/70 border border-royal-gold/60 text-xs text-royal-gold mb-3">
+          <span>🐪</span>
+          <span>The Royal Caravan of Life</span>
+          <span>🐘</span>
+        </div>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-royal-brightGold">
+          Safarnama: A King's Journey
+        </h2>
+        <div class="mt-2 font-hindi text-xl text-amber-200">
+          "बचपन के आंगन से लेकर आज तक की स्वर्णिम यादों का सफर"
+        </div>
+      </div>
+
+      <!-- Central Royal Timeline Path -->
+      <div class="relative max-w-5xl mx-auto">
+
+        <!-- Center Golden Line with Radiant Glow -->
+        <div
+          class="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-1.5 bg-gradient-to-b from-royal-gold via-amber-500 to-rose-700 hidden md:block rounded-full shadow-[0_0_15px_#FFD700]">
+        </div>
+
+        <div class="space-y-16 relative">
+
+          <!-- MILESTONE 1: 12 October 1974 (Birth of Papa) -->
+          <div class="flex flex-col md:flex-row items-center gap-8 relative group">
+            <div class="w-full md:w-1/2 md:pr-10 text-right order-2 md:order-1">
+              <div class="ethnic-gold-border p-6 rounded-3xl hover:border-royal-brightGold transition-all">
+                <div class="flex items-center justify-end gap-2 text-royal-brightGold text-xs font-semibold mb-1">
+                  <span>Milestone 1 • The Auspicious Beginning</span>
+                  <span>🌟</span>
+                </div>
+                <div class="text-xs font-mono tracking-wider text-amber-300 font-bold uppercase mb-1">
+                  📅 12 October 1974
+                </div>
+                <h3 class="text-2xl font-bold text-royal-gold mb-2">Arrival of the King (Birth & Childhood)</h3>
+
+                <p class="font-hindi text-base text-amber-200 italic mb-2">
+                  "इस पावन दिन एक अनमोल रत्न का आगमन हुआ, जिसने आगे चलकर पूरे परिवार को रोशन किया।"
+                </p>
+                <p class="text-xs text-neutral-300 leading-relaxed mb-4 text-justify md:text-right">
+                  On this auspicious day—12th October 1974—Papa was born. Surrounded by the warmth of ancestral soil and
+                  village laughter, your early childhood shaped the humility, values, and strong character you embody
+                  today.
+                </p>
+
+                <div class="border-t border-royal-gold/20 pt-3 text-right">
+                  <span class="text-xs text-amber-300/80 italic font-hindi">बचपन की यादें 🌱</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Milestone Date Badge -->
+            <div
+              class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-200 border-4 border-royal-black text-royal-black flex flex-col items-center justify-center font-bold text-xs shadow-[0_0_20px_#FFA500] order-1 md:order-2 shrink-0">
+              <span class="text-base">🪔</span>
+              <span class="text-[10px] font-bold leading-none">1974</span>
+            </div>
+
+            <div class="w-full md:w-1/2 md:pl-10 order-3">
+              <div
+                class="relative max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden border-2 border-royal-gold p-2 bg-black/60 shadow-xl group-hover:scale-[1.02] transition-transform">
+                <img id="ms-img-1" src="Screenshot 2026-10-12 135931.png" alt="Childhood Days"
+                  class="w-full h-56 object-cover rounded-xl"
+                  onerror="this.src='https://placehold.co/500x350/250B10/FFD700?text=Childhood+Memories+1974'">
+                <div
+                  class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-royal-gold/40 text-center font-hindi text-xs text-amber-200">
+                  "12 अक्टूबर 1974: इस दिन हमारे आदर्श का आगमन हुआ"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MILESTONE 2: 30 November 2002 (Wedding Day) -->
+          <div class="flex flex-col md:flex-row items-center gap-8 relative group">
+            <div class="w-full md:w-1/2 md:pr-10 text-right order-3 md:order-1">
+              <div
+                class="relative max-w-sm mx-auto md:ml-auto md:mr-0 rounded-2xl overflow-hidden border-2 border-royal-gold p-2 bg-black/60 shadow-xl group-hover:scale-[1.02] transition-transform">
+                <img id="ms-img-2" src="image3.jpeg" alt="Sacred Wedding" class="w-full h-56 object-cover rounded-xl"
+                  onerror="this.src='https://placehold.co/500x350/250B10/FFD700?text=Wedding+Celebration+2002'">
+                <div
+                  class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-royal-gold/40 text-center font-hindi text-xs text-amber-200">
+                  "30 नवम्बर 2002: सात फेरे और खुशहाल नई शुरुआत"
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-tr from-rose-600 via-amber-400 to-rose-300 border-4 border-royal-black text-royal-black flex flex-col items-center justify-center font-bold text-xs shadow-[0_0_20px_#FF1493] order-1 md:order-2 shrink-0">
+              <span class="text-base">💍</span>
+              <span class="text-[10px] font-bold leading-none">2002</span>
+            </div>
+
+            <div class="w-full md:w-1/2 md:pl-10 order-2 md:order-3">
+              <div class="ethnic-gold-border p-6 rounded-3xl hover:border-royal-brightGold transition-all">
+                <div class="flex items-center gap-2 text-royal-brightGold text-xs font-semibold mb-1">
+                  <span>👰🤵</span>
+                  <span>Milestone 2 • Sacred Union</span>
+                </div>
+                <div class="text-xs font-mono tracking-wider text-amber-300 font-bold uppercase mb-1">
+                  📅 30 November 2002
+                </div>
+                <h3 class="text-2xl font-bold text-royal-gold mb-2">The Royal Wedding (Shadi Ka Din)</h3>
+
+                <p class="font-hindi text-base text-amber-200 italic mb-2">
+                  "दो दिलों का पावन संगम, और साथ निभाने का जीवन भर का अटूट वादा।"
+                </p>
+                <p class="text-xs text-neutral-300 leading-relaxed mb-4 text-justify">
+                  On 30th November 2002, the sacred Shehnai played as Papa and Mummy tied the knot of love and
+                  companionship. Together, you turned dreams into reality and laid the royal cornerstone of our warm
+                  household.
+                </p>
+
+                <div class="border-t border-royal-gold/20 pt-3">
+                  <span class="text-xs text-amber-300/80 italic font-hindi">पापा और मम्मी का साथ ❤️</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MILESTONE 3: 28 August 2004 (First Child's Birth) -->
+          <div class="flex flex-col md:flex-row items-center gap-8 relative group">
+            <div class="w-full md:w-1/2 md:pr-10 text-right order-2 md:order-1">
+              <div class="ethnic-gold-border p-6 rounded-3xl hover:border-royal-brightGold transition-all">
+                <div class="flex items-center justify-end gap-2 text-royal-brightGold text-xs font-semibold mb-1">
+                  <span>Milestone 3 • Becoming a Father</span>
+                  <span>👶</span>
+                </div>
+                <div class="text-xs font-mono tracking-wider text-amber-300 font-bold uppercase mb-1">
+                  📅 28 August 2004
+                </div>
+                <h3 class="text-2xl font-bold text-royal-gold mb-2">Arrival of the First Child</h3>
+
+                <p class="font-hindi text-base text-amber-200 italic mb-2">
+                  "नन्हीं किलकारी से गूंजा घर-आंगन, जब पापा की गोद में आई पहली खुशी।"
+                </p>
+                <p class="text-xs text-neutral-300 leading-relaxed mb-4 text-justify md:text-right">
+                  28th August 2004 brought boundless joy as you embraced fatherhood for the very first time. From those
+                  tiny hands holding your finger to the sleepless nights spent protecting your child, your love knew no
+                  bounds.
+                </p>
+
+                <div class="border-t border-royal-gold/20 pt-3 text-right">
+                  <span class="text-xs text-amber-300/80 italic font-hindi">पहला लाडला / लाडली 💖</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-200 border-4 border-royal-black text-royal-black flex flex-col items-center justify-center font-bold text-xs shadow-[0_0_20px_#FFA500] order-1 md:order-2 shrink-0">
+              <span class="text-base">🍼</span>
+              <span class="text-[10px] font-bold leading-none">2004</span>
+            </div>
+
+            <div class="w-full md:w-1/2 md:pl-10 order-3">
+              <div
+                class="relative max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden border-2 border-royal-gold p-2 bg-black/60 shadow-xl group-hover:scale-[1.02] transition-transform">
+                <img id="ms-img-3" src="image2.png" alt="First Child Memory" class="w-full h-56 object-cover rounded-xl"
+                  onerror="this.src='https://placehold.co/500x350/250B10/FFD700?text=First+Child+Arrival+2004'">
+                <div
+                  class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-royal-gold/40 text-center font-hindi text-xs text-amber-200">
+                  "28 अगस्त 2004: पापा के जीवन में पहली नन्हीं खुशियों का आगमन"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MILESTONE 4: 14 August 2007 (Second Child's Birth) -->
+          <div class="flex flex-col md:flex-row items-center gap-8 relative group">
+            <div class="w-full md:w-1/2 md:pr-10 text-right order-3 md:order-1">
+              <div
+                class="relative max-w-sm mx-auto md:ml-auto md:mr-0 rounded-2xl overflow-hidden border-2 border-royal-gold p-2 bg-black/60 shadow-xl group-hover:scale-[1.02] transition-transform">
+                <img id="ms-img-4" src="image4.png" alt="Second Child Memory"
+                  class="w-full h-56 object-cover rounded-xl"
+                  onerror="this.src='https://placehold.co/500x350/250B10/FFD700?text=Second+Child+Arrival+2007'">
+                <div
+                  class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-royal-gold/40 text-center font-hindi text-xs text-amber-200">
+                  "14 अगस्त 2007: परिवार का संसार पूरा और संपूर्ण हुआ"
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-200 border-4 border-royal-black text-royal-black flex flex-col items-center justify-center font-bold text-xs shadow-[0_0_20px_#FFA500] order-1 md:order-2 shrink-0">
+              <span class="text-base">🧸</span>
+              <span class="text-[10px] font-bold leading-none">2007</span>
+            </div>
+
+            <div class="w-full md:w-1/2 md:pl-10 order-2 md:order-3">
+              <div class="ethnic-gold-border p-6 rounded-3xl hover:border-royal-brightGold transition-all">
+                <div class="flex items-center gap-2 text-royal-brightGold text-xs font-semibold mb-1">
+                  <span>👨‍👧‍👦</span>
+                  <span>Milestone 4 • Completed Family Circle</span>
+                </div>
+                <div class="text-xs font-mono tracking-wider text-amber-300 font-bold uppercase mb-1">
+                  📅 14 August 2007
+                </div>
+                <h3 class="text-2xl font-bold text-royal-gold mb-2">Arrival of the Second Child</h3>
+
+                <p class="font-hindi text-base text-amber-200 italic mb-2">
+                  "घर में दुगुनी खुशियां, जब परिवार का यह प्यारा संसार पूरा हुआ।"
+                </p>
+                <p class="text-xs text-neutral-300 leading-relaxed mb-4 text-justify">
+                  On 14th August 2007, our family became complete! With twice the giggles, laughter, and mischief, you
+                  gave each of us equal love, care, and gentle guidance, turning our home into heaven on earth.
+                </p>
+
+                <div class="border-t border-royal-gold/20 pt-3">
+                  <span class="text-xs text-amber-300/80 italic font-hindi">हम दोनों का प्यार 🥰</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MILESTONE 5: Today & Beyond (Our Hero Today) -->
+          <div class="flex flex-col md:flex-row items-center gap-8 relative group">
+            <div class="w-full md:w-1/2 md:pr-10 text-right order-2 md:order-1">
+              <div
+                class="ethnic-gold-border p-6 rounded-3xl border-2 border-royal-gold shadow-[0_0_25px_rgba(229,169,59,0.3)] hover:border-royal-brightGold transition-all">
+                <div class="flex items-center justify-end gap-2 text-royal-brightGold text-xs font-semibold mb-1">
+                  <span>Milestone 5 • Crown of the Household</span>
+                  <span>👑</span>
+                </div>
+                <div class="text-xs font-mono tracking-wider text-amber-300 font-bold uppercase mb-1">
+                  📅 Today & Forever
+                </div>
+                <h3 class="text-2xl font-bold text-royal-brightGold mb-2">Our Forever King - Wisdom & Pride</h3>
+
+                <p class="font-hindi text-base text-amber-200 italic mb-2">
+                  "आपकी मुस्कान ही हमारी सबसे बड़ी पूंजी और हमारी पहचान है।"
+                </p>
+                <p class="text-xs text-neutral-300 leading-relaxed mb-4 text-justify md:text-right">
+                  Today, we look at you with endless awe and gratitude. All the sacrifices you made, all the dreams you
+                  fostered—we promise to honor your legacy and make your proud eyes shine brighter every single day.
+                </p>
+
+                <div class="border-t border-royal-gold/20 pt-3 text-right">
+                  <span class="text-xs text-amber-300 font-bold">Happy Birthday Papa! 🎂</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-tr from-amber-400 via-royal-gold to-yellow-200 border-4 border-royal-black text-royal-black flex flex-col items-center justify-center font-bold text-xs shadow-[0_0_30px_#FFD700] order-1 md:order-2 shrink-0 animate-bounce">
+              <span class="text-lg">👑</span>
+              <span class="text-[10px] font-bold leading-none">KING</span>
+            </div>
+
+            <div class="w-full md:w-1/2 md:pl-10 order-3">
+              <div
+                class="relative max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden border-2 border-royal-gold p-2 bg-black/60 shadow-xl group-hover:scale-[1.02] transition-transform">
+                <img id="ms-img-5" src="family.jpeg" alt="Papa Today" class="w-full h-56 object-cover rounded-xl"
+                  onerror="this.src='https://placehold.co/500x350/250B10/FFD700?text=Papa+Our+Hero+Today'">
+                <div
+                  class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-royal-gold text-center font-hindi text-xs text-royal-brightGold font-medium">
+                  "परिवार की शान, पापा हमारी जान ❤️"
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- A Heartfelt Letter from Akshu to Papa -->
+    <section id="akshu-letter" class="my-20 relative">
+      <div class="max-w-4xl mx-auto relative">
+
+        <!-- Decorative Gold Glow -->
+        <div
+          class="absolute -inset-3 bg-gradient-to-r from-royal-gold via-rose-600 to-royal-gold rounded-[2rem] blur-xl opacity-20">
+        </div>
+
+        <!-- Letter Card -->
+        <div class="relative ethnic-gold-border rounded-3xl p-6 sm:p-10 md:p-14 overflow-hidden">
+
+          <!-- Royal Corner Decorations -->
+          <div class="absolute top-3 left-4 text-royal-gold text-2xl">❦</div>
+          <div class="absolute top-3 right-4 text-royal-gold text-2xl">❦</div>
+          <div class="absolute bottom-3 left-4 text-royal-gold text-2xl">❦</div>
+          <div class="absolute bottom-3 right-4 text-royal-gold text-2xl">❦</div>
+
+          <!-- Letter Heading -->
+          <div class="text-center mb-8">
+            <div class="text-4xl mb-3">💌</div>
+
+            <span
+              class="inline-block px-4 py-1.5 rounded-full border border-royal-gold/50 bg-black/40 text-amber-300 text-xs tracking-widest uppercase mb-4">
+              A Letter From The Heart
+            </span>
+
+            <h2 class="font-royal text-3xl sm:text-4xl md:text-5xl gold-gradient-text leading-tight">
+              Dear Papa ❤️
+            </h2>
+
+            <p class="font-hindi text-xl sm:text-2xl text-amber-200 mt-3">
+              कुछ बातें दिल से... सिर्फ आपके लिए 🥺
+            </p>
+
+            <div class="flex items-center justify-center gap-3 mt-5">
+              <span class="h-px w-12 bg-royal-gold/70"></span>
+              <span class="text-royal-gold">✦ ♥ ✦</span>
+              <span class="h-px w-12 bg-royal-gold/70"></span>
+            </div>
+          </div>
+
+          <!-- Personal Message -->
+          <div class="font-sans text-sm sm:text-base md:text-lg text-amber-100/95 leading-8 sm:leading-9 space-y-5">
+
+            <p class="text-center text-royal-brightGold font-semibold text-xl sm:text-2xl">
+              Hii Papa, Happy Birthday to you! 🎂❤️
+            </p>
+
+            <p>
+              Me aapse aaj kuch kehna chahti hu 🥺
+            </p>
+
+            <p>
+              Muje pata he ki mene aapki ummede todi he or mene kaafi baar aapka dil bhi dukhaya he.
+              Aapki baat kabhi nahi suni or har baar muje galat hi results mile he.
+            </p>
+
+            <p>
+              But me aapse promise krti hu ki mene jo socha he wo me zrur krke dikhaungi. ❤️
+            </p>
+
+            <p>
+              Aapne har baar muje motivate kiya. Jab jab Giri tab tab uthna or ladna sikhaya.
+              Thank you so much 🤗🥹 sab kuch dene ke liye.
+            </p>
+
+            <p>
+              Aapne apni zimmedari Puri tarah se nibhayi he or ab humari baari he.
+            </p>
+
+            <p>
+              Ummm ab thoda time lagega recover hone me 😅 but sab sahi ho jayega 😊
+            </p>
+
+            <p class="text-royal-brightGold font-semibold text-lg sm:text-xl">
+              Aap mere life ke Shree Krishna or Chanakya he. 🙏❤️
+            </p>
+
+            <p>
+              Sorry mene aapki baat kabhi nahi suni 🥺
+            </p>
+
+            <!-- Emotional Highlight -->
+            <div class="my-7 p-5 sm:p-7 rounded-2xl bg-black/40 border border-royal-gold/40 text-center">
+              <p class="font-hindi text-lg sm:text-xl text-amber-200 mb-4">
+                Or at last yahi kahungi ki...
+              </p>
+
+              <p class="text-amber-100 leading-9">
+                Chahe koi kuch bhi kahe,<br>
+                Aap boht ache bete he. ❤️<br>
+                Aap boht ache pati he. ❤️<br>
+                Aap boht ache bhai he. ❤️<br>
+                Or aap boht ache pita he. 👑
+              </p>
+            </div>
+
+            <p class="text-center text-rose-300 font-semibold text-xl sm:text-2xl leading-relaxed">
+              I love you to the moon and back ❤️😘🩷🤗🫶🏻
+            </p>
+
+          </div>
+
+          <!-- Signature -->
+          <div class="mt-9 pt-6 border-t border-royal-gold/30 text-right">
+            <p class="font-hindi text-lg sm:text-xl text-amber-200 mb-2">
+              ढेर सारा प्यार और एक प्यारी-सी झप्पी 🤗
+            </p>
+
+            <p class="font-royal text-xl sm:text-2xl gold-gradient-text">
+              — Aapki Pyari Si AKSHU ❤️
+            </p>
+
+            <div class="text-3xl mt-4">🌹 🫶🏻 🌹</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Royal Keepsake Wall & Sacred Blessings for Papa -->
+    <section class="my-20">
+      <div class="text-center mb-10">
+        <div
+          class="inline-flex items-center gap-2 px-5 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/50 text-xs text-emerald-300 mb-2">
+          <span>🪔</span>
+          <span>Sacred Family Prayers</span>
+          <span>🪔</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-bold text-royal-brightGold">
+          Sacred Prayers for Papa
+        </h2>
+        <div class="mt-2 font-hindi text-xl text-amber-200">
+          "प्रभु से यही प्रार्थना है कि आप सदा स्वस्थ और मुस्कुराते रहें"
+        </div>
+      </div>
+
+      <!-- Royal Decorative Display Keepsakes -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Keepsake 1 -->
+        <div class="ethnic-gold-border p-6 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="text-3xl mb-3">🌺</div>
+            <h3 class="text-lg font-bold text-royal-brightGold mb-2">Longevity & Divine Health</h3>
+            <p class="font-hindi text-base text-amber-100 leading-relaxed">
+              "ईश्वर आपको अखंड स्वास्थ्य, आरोग्य और दीर्घायु प्रदान करें। हर दिन आपके मुखमंडल पर संतोष और मुस्कान बनी
+              रहे।"
+            </p>
+          </div>
+          <div
+            class="mt-6 pt-3 border-t border-royal-gold/20 text-xs text-amber-300/70 uppercase tracking-widest font-semibold flex items-center justify-between">
+            <span>✦ Ayushman Bhava ✦</span>
+            <span>🕉️</span>
+          </div>
+        </div>
+
+        <!-- Keepsake 2 -->
+        <div
+          class="ethnic-gold-border p-6 rounded-3xl border-2 border-royal-brightGold shadow-[0_0_25px_rgba(255,215,0,0.2)] flex flex-col justify-between">
+          <div>
+            <div class="text-3xl mb-3">👑</div>
+            <h3 class="text-lg font-bold text-royal-brightGold mb-2">Eternal Inspiration</h3>
+            <p class="font-hindi text-base text-amber-100 leading-relaxed">
+              "पापा, आपकी मेहनत और निष्ठा को शब्दों में बांधा नहीं जा सकता। आप हमारे लिए भगवान का सबसे सुंदर और सच्चा
+              रूप हैं।"
+            </p>
+          </div>
+          <div
+            class="mt-6 pt-3 border-t border-royal-gold/20 text-xs text-amber-300/70 uppercase tracking-widest font-semibold flex items-center justify-between">
+            <span>✦ Our Guiding Mentor ✦</span>
+            <span>✨</span>
+          </div>
+        </div>
+
+        <!-- Keepsake 3 -->
+        <div class="ethnic-gold-border p-6 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="text-3xl mb-3">🦚</div>
+            <h3 class="text-lg font-bold text-royal-brightGold mb-2">Serenity & Boundless Joy</h3>
+            <p class="font-hindi text-base text-amber-100 leading-relaxed">
+              "जीवन के हर मोड़ पर सुख, शांति और समृद्धि आपके कदम चूमे। आपका आशीष ही हमारे जीवन की सबसे बड़ी पूंजी है।"
+            </p>
+          </div>
+          <div
+            class="mt-6 pt-3 border-t border-royal-gold/20 text-xs text-amber-300/70 uppercase tracking-widest font-semibold flex items-center justify-between">
+            <span>✦ Shanti & Anand ✦</span>
+            <span>🚩</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Royal Footer -->
+    <footer class="mt-20 pt-10 border-t-2 border-royal-gold/30 text-center relative">
+      <div class="max-w-xl mx-auto mb-6">
+        <div class="w-16 h-1 bg-royal-gold mx-auto mb-4 rounded-full"></div>
+        <p class="font-hindi text-2xl text-royal-gold">॥ सर्व मंगल मांगल्ये शिवे सर्वार्थ साधिके ॥</p>
+        <p class="text-xs text-amber-100/70 mt-2">
+          Designed with infinite love, gratitude, and devotion by your children for our beloved Papa.
+        </p>
+      </div>
+
+      <div class="flex justify-center items-center gap-6 text-sm text-royal-brightGold mb-4">
+        <span>🚩 Respect</span>
+        <span>•</span>
+        <span>❤️ Unconditional Love</span>
+        <span>•</span>
+        <span>✨ Long Life</span>
+      </div>
+
+      <div class="text-xs text-neutral-500 pb-8 font-hindi">
+        सप्रेम भेंट: 28 अगस्त 2004 और 14 अगस्त 2007 की खुशियों की ओर से सप्रेम चरण वंदन ❤️
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // 1. Audio Synthesizer for Traditional Royal Indian Sitar & Shenhai Melody
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyTimer = null;
+
+    const frequencies = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+    const melodyPattern = [0, 1, 2, 4, 3, 2, 1, 0, 2, 4, 5, 4, 2, 1, 0, 4];
+    let noteIdx = 0;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playIndianNote(freq, duration = 0.45) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio note error:', e);
+      }
+    }
+
+    function toggleRoyalMusic() {
+      initAudioContext();
+      const textSpan = document.getElementById('musicText');
+      const iconSpan = document.getElementById('musicIcon');
+
+      if (!isPlaying) {
+        isPlaying = true;
+        textSpan.innerText = 'Royal Sitar: Playing';
+        iconSpan.classList.add('animate-spin');
+
+        melodyTimer = setInterval(() => {
+          const freq = frequencies[melodyPattern[noteIdx % melodyPattern.length]];
+          playIndianNote(freq, 0.4);
+          noteIdx++;
+        }, 320);
+
+      } else {
+        isPlaying = false;
+        clearInterval(melodyTimer);
+        textSpan.innerText = 'Royal Sitar BGM: Start';
+        iconSpan.classList.remove('animate-spin');
+      }
+    }
+
+    // 2. Falling Rose Petals Shower Effect
+    function triggerRoseShower() {
+      const container = document.getElementById('petals-container');
+      const petalEmojis = ['🌸', '🌹', '🌺', '🌼', '🏵️'];
+
+      for (let i = 0; i < 28; i++) {
+        setTimeout(() => {
+          const petal = document.createElement('div');
+          petal.className = 'petal-falling select-none';
+          petal.innerText = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+          petal.style.left = Math.random() * 95 + 'vw';
+          petal.style.top = '-50px';
+          petal.style.fontSize = (18 + Math.random() * 22) + 'px';
+          petal.style.animationDuration = (3.5 + Math.random() * 3.5) + 's';
+          container.appendChild(petal);
+
+          setTimeout(() => {
+            petal.remove();
+          }, 7000);
+        }, i * 120);
+      }
+    }
+
+    // 3. Grand Golden Confetti & Rose Shower Celebration
+    function triggerGrandCelebration() {
+      initAudioContext();
+      if (!isPlaying) {
+        toggleRoyalMusic();
+      }
+
+      const count = 220;
+      const defaults = {
+        origin: {y: 0.6}
+      };
+
+      function fire(particleRatio, opts) {
+        confetti(Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio),
+          colors: ['#FFD700', '#DF9B52', '#8C1D2A', '#FFFFFF', '#0E4438']
+        }));
+      }
+
+      fire(0.25, {spread: 26, startVelocity: 55});
+      fire(0.2, {spread: 60});
+      fire(0.35, {spread: 100, decay: 0.91, scalar: 0.8});
+      fire(0.1, {spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2});
+      fire(0.1, {spread: 120, startVelocity: 45});
+
+      triggerRoseShower();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(triggerRoseShower, 1200);
+    });
+  </script>
+</body>
+
+</html>
